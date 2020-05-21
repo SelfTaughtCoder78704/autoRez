@@ -1,0 +1,22 @@
+{
+  "name": "autoresponder_template",
+  "version": "1.0.0",
+  "description": "Template for catching emails through a sign-up form and automatically responding",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "author": "Bobby Nicholson",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-handlebars": "^4.0.4",
+    "mongoose": "^5.9.15",
+    "nodemailer": "^6.4.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
