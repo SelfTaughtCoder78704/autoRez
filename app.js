@@ -1,21 +1,19 @@
 const express = require('express');
+const dotenv = require('dotenv');
 const cors = require('cors')
 const nodemailer = require('nodemailer');
 const mongoose = require('mongoose');
-const db = require('./config/keys');
-const Schema = mongoose.Schema;
+const registerRouter = require('./routes/register');
 
-const ClientRequestSchema = new Schema({
-    firstName: String,
-    lastName: String,
-    email: String,
-    phoneNumber: Number
-})
 
-const clientRqModel = mongoose.model('clientRqModel', ClientRequestSchema);
+
+dotenv.config();
+
+
 //CONNECT TO MONGODB
+const db = process.env.DB_PASSWORD
 mongoose.connect(
-    db, 
+    db,
     {useNewUrlParser: true, useUnifiedTopology: true}
 ).then(() => {
     console.log('MONGODB CONNECTED');
@@ -28,26 +26,9 @@ app.use(express.urlencoded({extended: true}));
 app.use(cors());
 
 
+app.use('/register', registerRouter);
 
 
-app.post('/', (req, res) =>{
-    let newRequest = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        phoneNumber: req.body.phoneNumber
-    }
-    if(! newRequest.firstName || ! newRequest.lastName || !newRequest.email || ! newRequest.phoneNumber){
-        res.json({msg: "GO BACK AND FILL IN ALL FORMS"})
-    }else{
-        let newClient = new clientRqModel(newRequest)
-        newClient.save()
-            .then(() => {
-                console.log(newClient)
-                res.end();
-            })
-    }
-})
 
 const PORT = process.env.PORT || 3000;
 
