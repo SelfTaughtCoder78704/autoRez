@@ -15,8 +15,8 @@ const schema = Joi.object({
 const Nexmo = require('nexmo');
 
 const nexmo = new Nexmo({
-  apiKey: '3e3a8a1e',
-  apiSecret: 'PjYXbfjdu5o0JYA4',
+  apiKey: process.env.NEXMO_API,
+  apiSecret: NEXMO_PS,
 });
 
 // const from = '17035968644';
